@@ -316,16 +316,16 @@ Made with ❤️ by [Abhishek Kumar](https://github.com/ocean-master0)
 
 
 ### `requirements.txt`
-```txt
+```
 Flask==2.3.3
 requests==2.31.0
 yt-dlp==2023.10.13
 instaloader==4.10.3
 Werkzeug==2.3.7
+```
 
 
 
----
 
 ## 🚀 Live Demo
 
@@ -333,7 +333,7 @@ You can try the application live here:
 
 🔗 [Live Website](https://universal-video-downloader-78zw.onrender.com)
 
----
+
 
 ## ⚠️ Notice: If the Live Site Doesn't Work
 
@@ -349,7 +349,7 @@ The application may fail to download content from certain sites (like YouTube or
 
 * **Platform Protections**: Many social platforms now aggressively block scraping or automated downloads, especially from shared or cloud IP addresses.
 
----
+
 
 ## 💻 Recommended Solution
 
@@ -372,6 +372,6 @@ http://127.0.0.1:5000
 
 Running it locally avoids many of the restrictions imposed on cloud-hosted environments.
 
----
+
 
 
