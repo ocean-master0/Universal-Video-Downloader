@@ -1,5 +1,4 @@
 
-```markdown
 # ✨ Universal Social Media Downloader
 
 A powerful, modern web application that allows you to download content from multiple social media platforms including YouTube, Instagram, TikTok, Twitter, Facebook, Reddit, and more. Built with Flask backend and featuring a beautiful glassmorphism UI design with animated backgrounds.
@@ -386,4 +385,4 @@ requests==2.31.0
 yt-dlp==2023.10.13
 instaloader==4.10.3
 Werkzeug==2.3.7
-```
+
