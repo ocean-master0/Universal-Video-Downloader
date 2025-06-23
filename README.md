@@ -313,14 +313,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 Made with ❤️ by [Abhishek Kumar](https://github.com/ocean-master0)
 ```
 
-
-
-
-
-
-
-
-
 ## 🚀 Live Demo
 
 You can try the application live here:
@@ -365,7 +357,4 @@ http://127.0.0.1:5000
 ```
 
 Running it locally avoids many of the restrictions imposed on cloud-hosted environments.
-
-
-
-
+```
