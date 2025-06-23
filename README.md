@@ -313,42 +313,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 Made with ❤️ by [Abhishek Kumar](https://github.com/ocean-master0)
 ```
 
-## 🚀 Live Demo
+git add README.md
+git commit -m "Add live demo and troubleshooting info to README"
+git push origin main
 
-You can try the application live here:
-
-🔗 [Live Website](https://universal-video-downloader-78zw.onrender.com)
-
-
-
-## ⚠️ Notice: If the Live Site Doesn't Work
-
-If the live demo doesn’t function correctly for some platforms like **YouTube** or **Instagram**, it’s likely due to restrictions on cloud-hosted environments like Render. These platforms actively detect and block such usage.
-
-### 🛠 Root Cause Analysis
-
-The application may fail to download content from certain sites (like YouTube or Instagram) when hosted on Render or similar cloud platforms. Here’s why:
-
-* **YouTube**: Detects requests from datacenter IPs (like those used by Render) and flags them as bots or abuse, blocking access.
-
-* **Instagram**: Returns **401 Unauthorized errors** when it receives requests from servers that are not logged in or come from cloud/VPS IPs.
-
-* **Platform Protections**: Many social platforms now aggressively block scraping or automated downloads, especially from shared or cloud IP addresses.
-
-
-
-## 💻 Recommended Solution
-
-To ensure the program works reliably:
-
-**➡️ Clone and run it locally** on your own machine, where it’s less likely to be blocked.
-
-```bash
-git clone https://github.com/ocean-master0/Universal-Video-Downloader.git
-cd Universal-Video-Downloader
-pip install -r requirements.txt
-python app.py
-```
 
 Then visit:
 
