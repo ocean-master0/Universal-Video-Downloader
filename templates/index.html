@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ Universal Social Media Downloader</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            position: relative;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            left: 10%;
+            animation-delay: 0s;
+            animation-duration: 20s;
+        }
+
+        .shape:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            left: 80%;
+            animation-delay: 2s;
+            animation-duration: 25s;
+        }
+
+        .shape:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            left: 45%;
+            animation-delay: 4s;
+            animation-duration: 18s;
+        }
+
+        .shape:nth-child(4) {
+            width: 40px;
+            height: 40px;
+            left: 20%;
+            animation-delay: 6s;
+            animation-duration: 22s;
+        }
+
+        .shape:nth-child(5) {
+            width: 120px;
+            height: 120px;
+            left: 70%;
+            animation-delay: 8s;
+            animation-duration: 16s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Glassmorphism Containers */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .glass-header {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            box-shadow: 
+                0 12px 40px rgba(0, 0, 0, 0.15),
+                inset 0 2px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            padding: 30px 0;
+        }
+
+        .header-content {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            font-weight: 800;
+            background: linear-gradient(45deg, #fff, #f8f9fa, #fff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
+            }
+            to {
+                text-shadow: 0 4px 30px rgba(255, 255, 255, 0.6);
+            }
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.4em;
+            font-weight: 500;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Social Media Icons */
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .social-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-icon.youtube:hover { color: #ff0000; }
+        .social-icon.instagram:hover { color: #e4405f; }
+        .social-icon.tiktok:hover { color: #000000; }
+        .social-icon.twitter:hover { color: #1da1f2; }
+        .social-icon.facebook:hover { color: #1877f2; }
+        .social-icon.reddit:hover { color: #ff4500; }
+        .social-icon.twitch:hover { color: #9146ff; }
+
+        /* Main Content */
+        .main-content {
+            padding: 40px 0;
+        }
+
+        .download-section {
+            padding: 50px;
+            margin-bottom: 40px;
+            animation: slideInUp 1s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            gap: 10px;
+        }
+
+        .tab {
+            padding: 15px 30px;
+            cursor: pointer;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab.active {
+            background: rgba(255, 255, 255, 0.25);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .tab:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Input Styles */
+        .input-group {
+            margin-bottom: 30px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 700;
+            color: white;
+            font-size: 18px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .url-input, .bulk-textarea {
+            width: 100%;
+            padding: 20px 25px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            font-size: 16px;
+            color: white;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .url-input::placeholder, .bulk-textarea::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .url-input:focus, .bulk-textarea:focus {
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 
+                inset 0 2px 10px rgba(0, 0, 0, 0.1),
+                0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .bulk-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Button Styles */
+        .button-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+            backdrop-filter: blur(20px);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 18px 35px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.2));
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, rgba(240, 147, 251, 0.3), rgba(245, 87, 108, 0.3));
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(45deg, rgba(240, 147, 251, 0.4), rgba(245, 87, 108, 0.4));
+        }
+
+        /* Status Messages */
+        .status {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 15px;
+            font-weight: 600;
+            display: none;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeInDown 0.5s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .status.success {
+            background: rgba(52, 211, 153, 0.2);
+            color: #ecfdf5;
+            border-color: rgba(52, 211, 153, 0.3);
+        }
+
+        .status.error {
+            background: rgba(248, 113, 113, 0.2);
+            color: #fef2f2;
+            border-color: rgba(248, 113, 113, 0.3);
+        }
+
+        .status.loading {
+            background: rgba(59, 130, 246, 0.2);
+            color: #eff6ff;
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin-top: 25px;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Feature Cards */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+
+        .feature-icon {
+            font-size: 4em;
+            margin-bottom: 25px;
+            background: linear-gradient(45deg, #fff, #f8f9fa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 4px 10px rgba(255, 255, 255, 0.3));
+        }
+
+        .feature-card h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Downloads List */
+        .downloads-section {
+            padding: 40px;
+            margin-top: 30px;
+        }
+
+        .downloads-list {
+            margin-top: 25px;
+        }
+
+        .download-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .download-item:hover {
+            transform: translateX(5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .header h1 {
+                font-size: 2.5em;
+            }
+
+            .download-section {
+                padding: 30px 20px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .social-icons {
+                gap: 15px;
+            }
+
+            .social-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="container">
+            <div class="glass-header header-content">
+                <h1>✨ Universal Downloader</h1>
+                <p>Download content from all major social media platforms instantly!</p>
+                
+                <!-- Social Media Icons -->
+                <div class="social-icons">
+                    <a href="#" class="social-icon youtube" title="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="#" class="social-icon instagram" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-icon tiktok" title="TikTok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="#" class="social-icon twitter" title="Twitter/X">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-icon facebook" title="Facebook">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" class="social-icon reddit" title="Reddit">
+                        <i class="fab fa-reddit"></i>
+                    </a>
+                    <a href="#" class="social-icon twitch" title="Twitch">
+                        <i class="fab fa-twitch"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="glass download-section">
+                <div class="tabs">
+                    <button class="tab active" onclick="switchTab('single')">
+                        <i class="fas fa-download"></i> Single Download
+                    </button>
+                    <button class="tab" onclick="switchTab('bulk')">
+                        <i class="fas fa-list"></i> Bulk Download
+                    </button>
+                    <button class="tab" onclick="switchTab('downloads')">
+                        <i class="fas fa-folder"></i> My Downloads
+                    </button>
+                </div>
+
+                <!-- Single Download Tab -->
+                <div id="single-tab" class="tab-content active">
+                    <div class="input-group">
+                        <label for="singleUrl">
+                            <i class="fas fa-link"></i> Enter URL to Download:
+                        </label>
+                        <input 
+                            type="url" 
+                            id="singleUrl" 
+                            class="url-input" 
+                            placeholder="🔗 https://www.youtube.com/watch?v=example or https://instagram.com/p/example"
+                        >
+                    </div>
+                    <div class="button-group">
+                        <button class="btn" onclick="downloadSingle()">
+                            <i class="fas fa-download"></i> Download Now
+                        </button>
+                        <button class="btn btn-secondary" onclick="detectPlatform()">
+                            <i class="fas fa-search"></i> Detect Platform
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Bulk Download Tab -->
+                <div id="bulk-tab" class="tab-content">
+                    <div class="input-group">
+                        <label for="bulkUrls">
+                            <i class="fas fa-list"></i> Enter Multiple URLs (one per line):
+                        </label>
+                        <textarea 
+                            id="bulkUrls" 
+                            class="bulk-textarea" 
+                            placeholder="📝 https://www.youtube.com/watch?v=example1&#10;https://instagram.com/p/example2&#10;https://tiktok.com/@user/video/example3"
+                        ></textarea>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn" onclick="downloadBulk()">
+                            <i class="fas fa-download"></i> Download All
+                        </button>
+                        <button class="btn btn-secondary" onclick="clearBulkUrls()">
+                            <i class="fas fa-trash"></i> Clear All
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Downloads Tab -->
+                <div id="downloads-tab" class="tab-content">
+                    <div class="button-group">
+                        <button class="btn" onclick="refreshDownloads()">
+                            <i class="fas fa-sync-alt"></i> Refresh List
+                        </button>
+                        <button class="btn btn-secondary" onclick="clearAllDownloads()">
+                            <i class="fas fa-trash-alt"></i> Clear All Downloads
+                        </button>
+                    </div>
+                    <div id="downloadsList" class="downloads-list">
+                        <p style="color: white; text-align: center;">
+                            <i class="fas fa-spinner fa-spin"></i> Loading downloads...
+                        </p>
+                    </div>
+                </div>
+
+                <div class="progress-container" id="progressContainer">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+
+                <div id="status" class="status"></div>
+            </div>
+
+            <div class="features-grid">
+                <div class="glass feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Smart Detection</h3>
+                    <p>Automatically detects platform and content type from any supported URL with intelligent algorithms</p>
+                </div>
+
+                <div class="glass feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>All Content Types</h3>
+                    <p>Videos, photos, stories, reels, playlists, and more from YouTube, Instagram, TikTok, and other platforms</p>
+                </div>
+
+                <div class="glass feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h3>Bulk Processing</h3>
+                    <p>Download multiple URLs simultaneously with progress tracking and batch management</p>
+                </div>
+
+                <div class="glass feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Privacy First</h3>
+                    <p>All processing done locally with automatic data cleanup and no permanent storage</p>
+                </div>
+
+                <div class="glass feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Optimized download speeds with parallel processing and intelligent compression</p>
+                </div>
+
+                <div class="glass feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Cross-Platform</h3>
+                    <p>Works seamlessly on Windows, macOS, Linux, and mobile devices with responsive design</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let currentDownloads = [];
+
+        // Page refresh detection and auto-clear
+        window.addEventListener('beforeunload', function() {
+            // This triggers the server-side session check
+            navigator.sendBeacon('/clear-downloads', JSON.stringify({}));
+        });
+
+        function switchTab(tabName) {
+            // Remove active class from all tabs and contents
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+            // Add active class to clicked tab and corresponding content
+            event.target.classList.add('active');
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+
+            if (tabName === 'downloads') {
+                refreshDownloads();
+            }
+        }
+
+        function showStatus(message, type) {
+            const status = document.getElementById('status');
+            status.innerHTML = `<i class="fas ${type === 'loading' ? 'fa-spinner fa-spin' : type === 'success' ? 'fa-check-circle' : 'fa-exclamation-triangle'}"></i> ${message}`;
+            status.className = `status ${type}`;
+            status.style.display = 'block';
+
+            if (type === 'success') {
+                setTimeout(() => {
+                    status.style.display = 'none';
+                }, 5000);
+            }
+        }
+
+        function showProgress(show = true) {
+            const progressContainer = document.getElementById('progressContainer');
+            progressContainer.style.display = show ? 'block' : 'none';
+            if (!show) {
+                document.getElementById('progressFill').style.width = '0%';
+            }
+        }
+
+        function updateProgress(percent) {
+            document.getElementById('progressFill').style.width = `${percent}%`;
+        }
+
+        function setButtonState(button, loading = false) {
+            if (loading) {
+                button.disabled = true;
+                button.innerHTML = button.innerHTML.replace(/fa-[^ ]+/, 'fa-spinner fa-spin');
+            } else {
+                button.disabled = false;
+                button.innerHTML = button.innerHTML.replace('fa-spinner fa-spin', button.classList.contains('btn-secondary') ? 'fa-search' : 'fa-download');
+            }
+        }
+
+        async function downloadSingle() {
+            const url = document.getElementById('singleUrl').value.trim();
+            const button = event.target;
+            
+            if (!url) {
+                showStatus('Please enter a valid URL', 'error');
+                return;
+            }
+
+            setButtonState(button, true);
+            showStatus('Starting download...', 'loading');
+            showProgress(true);
+            updateProgress(20);
+
+            try {
+                const response = await fetch('/download', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ url: url })
+                });
+
+                updateProgress(80);
+                const result = await response.json();
+                updateProgress(100);
+
+                if (result.status === 'success') {
+                    showStatus(`✅ ${result.message}`, 'success');
+                    refreshDownloads();
+                    document.getElementById('singleUrl').value = '';
+                } else {
+                    showStatus(`❌ ${result.message}`, 'error');
+                }
+            } catch (error) {
+                showStatus(`❌ Network error: ${error.message}`, 'error');
+            } finally {
+                setButtonState(button, false);
+                showProgress(false);
+            }
+        }
+
+        async function downloadBulk() {
+            const urlsText = document.getElementById('bulkUrls').value.trim();
+            const button = event.target;
+            
+            if (!urlsText) {
+                showStatus('Please enter URLs for bulk download', 'error');
+                return;
+            }
+
+            const urls = urlsText.split('\n').filter(url => url.trim());
+            
+            if (urls.length === 0) {
+                showStatus('No valid URLs found', 'error');
+                return;
+            }
+
+            setButtonState(button, true);
+            showStatus(`Starting bulk download of ${urls.length} URLs...`, 'loading');
+            showProgress(true);
+
+            try {
+                const response = await fetch('/bulk-download', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ urls: urls })
+                });
+
+                updateProgress(90);
+                const result = await response.json();
+                updateProgress(100);
+
+                if (result.status === 'success') {
+                    const successCount = result.success_count || result.results.filter(r => r.status === 'success').length;
+                    showStatus(`✅ Completed! ${successCount}/${urls.length} downloads successful`, 'success');
+                    refreshDownloads();
+                    document.getElementById('bulkUrls').value = '';
+                } else {
+                    showStatus(`❌ ${result.message}`, 'error');
+                }
+            } catch (error) {
+                showStatus(`❌ Network error: ${error.message}`, 'error');
+            } finally {
+                setButtonState(button, false);
+                showProgress(false);
+            }
+        }
+
+        async function detectPlatform() {
+            const url = document.getElementById('singleUrl').value.trim();
+            
+            if (!url) {
+                showStatus('Please enter a URL first', 'error');
+                return;
+            }
+
+            const platforms = {
+                'youtube.com': 'YouTube 📺',
+                'youtu.be': 'YouTube 📺',
+                'instagram.com': 'Instagram 📷',
+                'tiktok.com': 'TikTok 🎵',
+                'facebook.com': 'Facebook 👥',
+                'twitter.com': 'Twitter 🐦',
+                'x.com': 'Twitter/X 🐦',
+                'reddit.com': 'Reddit 🔴',
+                'twitch.tv': 'Twitch 🎮'
+            };
+
+            let detectedPlatform = 'Unknown Platform 🤷‍♂️';
+            for (const [domain, platform] of Object.entries(platforms)) {
+                if (url.includes(domain)) {
+                    detectedPlatform = platform;
+                    break;
+                }
+            }
+
+            showStatus(`🎯 Detected Platform: ${detectedPlatform}`, 'success');
+        }
+
+        async function refreshDownloads() {
+            try {
+                const response = await fetch('/downloads');
+                const data = await response.json();
+                
+                const downloadsList = document.getElementById('downloadsList');
+                
+                if (data.items && data.items.length > 0) {
+                    downloadsList.innerHTML = data.items.map(item => `
+                        <div class="download-item">
+                            <div style="color: white;">
+                                <strong><i class="fas ${item.type === 'file' ? 'fa-file' : 'fa-folder'}"></i> ${item.name}</strong>
+                                <br>
+                                <small style="color: rgba(255,255,255,0.8);">
+                                    ${item.type === 'file' 
+                                        ? `File - ${(item.size / 1024 / 1024).toFixed(2)} MB` 
+                                        : `Folder - ${item.file_count} files`}
+                                </small>
+                            </div>
+                            <div>
+                                <button class="btn" onclick="downloadItem('${item.name}', '${item.type}')" style="padding: 10px 20px; font-size: 14px;">
+                                    <i class="fas fa-download"></i> Download
+                                </button>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    downloadsList.innerHTML = '<p style="color: white; text-align: center;"><i class="fas fa-inbox"></i> No downloads found. Start downloading some content!</p>';
+                }
+            } catch (error) {
+                document.getElementById('downloadsList').innerHTML = '<p style="color: white; text-align: center;"><i class="fas fa-exclamation-triangle"></i> Error loading downloads</p>';
+            }
+        }
+
+        function downloadItem(name, type) {
+            const endpoint = type === 'file' ? '/download-file/' : '/download-folder/';
+            window.open(endpoint + encodeURIComponent(name), '_blank');
+        }
+
+        function clearBulkUrls() {
+            document.getElementById('bulkUrls').value = '';
+            showStatus('📝 Bulk URLs cleared', 'success');
+        }
+
+        async function clearAllDownloads() {
+            if (confirm('🗑️ Are you sure you want to clear all downloads? This action cannot be undone.')) {
+                try {
+                    const response = await fetch('/clear-downloads', {
+                        method: 'POST'
+                    });
+                    const result = await response.json();
+                    
+                    if (result.status === 'success') {
+                        showStatus('🧹 All downloads cleared successfully', 'success');
+                        refreshDownloads();
+                    } else {
+                        showStatus(result.message, 'error');
+                    }
+                } catch (error) {
+                    showStatus('❌ Error clearing downloads', 'error');
+                }
+            }
+        }
+
+        // Auto-refresh downloads every 30 seconds when on downloads tab
+        setInterval(() => {
+            if (document.getElementById('downloads-tab').classList.contains('active')) {
+                refreshDownloads();
+            }
+        }, 30000);
+
+        // Initialize downloads list on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            refreshDownloads();
+            
+            // Add keyboard shortcuts
+            document.addEventListener('keydown', (e) => {
+                if (e.ctrlKey && e.key === 'Enter') {
+                    const activeTab = document.querySelector('.tab-content.active');
+                    if (activeTab.id === 'single-tab') {
+                        downloadSingle();
+                    } else if (activeTab.id === 'bulk-tab') {
+                        downloadBulk();
+                    }
+                }
+            });
+        });
+
+        // Add smooth scrolling for better UX
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
