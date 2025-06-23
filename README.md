@@ -315,14 +315,8 @@ Made with ❤️ by [Abhishek Kumar](https://github.com/ocean-master0)
 
 
 
-### `requirements.txt`
-```
-Flask==2.3.3
-requests==2.31.0
-yt-dlp==2023.10.13
-instaloader==4.10.3
-Werkzeug==2.3.7
-```
+
+
 
 
 
