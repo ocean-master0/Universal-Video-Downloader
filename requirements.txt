@@ -1,6 +1,6 @@
-Flask==3.0.0
+Flask==3.0.1
 requests==2.31.0
-yt-dlp==2024.1.7
+yt-dlp==2024.12.23
 instaloader==4.12
 Werkzeug==3.0.1
 gunicorn==21.2.0
