@@ -342,13 +342,5 @@ git clone https://github.com/ocean-master0/Universal-Video-Downloader.git
 cd Universal-Video-Downloader
 pip install -r requirements.txt
 python app.py
-
-
-Then visit:
-
 ```
-http://127.0.0.1:5000
-```
-
-Running it locally avoids many of the restrictions imposed on cloud-hosted environments.
-```
+---
